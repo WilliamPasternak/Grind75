@@ -41,6 +41,26 @@ var isValid = function(s) {
     return needToClose.length === 0
 };
 
+// Refactored
+function isValid(s) {
+  const pairs = { '(': ')', '{': '}', '[': ']' };
+  const needToClose = [];   
+  for(const char of s){
+  // If char is an opening bracket, push to needToClose array.
+  if (char in pairs) needToClose.push(char);   
+
+  // If last char in 'needToClose' doesn't pair with current closing bracket, return false.
+  else if (pairs[needToClose.pop()] !== char) return false;
+  }
+  
+  // If needToClose is empty, all have been closed.
+  return !needToClose.length 
+};
+
+
+
+
+
 // Tests:
 // Single Pair
 console.log(isValid('()'), 'true')
